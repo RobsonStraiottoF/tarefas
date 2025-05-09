@@ -3,15 +3,21 @@
 
 <h2>Editar Tarefa</h2>
 
-<form action="#" method="post">
+<form action="{{ route('atualizar', $tarefa->id) }}" method="post">
+    @method('put')
+    @csrf
 
     <div class="form-group">
-        <input type="text" nome="tarefa" class="form-control">
+        <input type="text" name="tarefa" class="form-control" value="{{ $tarefa->tarefa }}">
     </div>
 
     <div class="mt-4">
-        <label type="radio" name="status" value="0" class="form-check-input">pendente</label>
-        <label type="radio" name="status" value="1" class="form-check-input">concluida</label>
+        <label>
+            <input type="radio" name="status" value="0" class="form-check-input" {{ $tarefa->status == 0 ? 'checked' : '' }}> pendente
+        </label>
+        <label>
+            <input type="radio" name="status" value="1" class="form-check-input" {{ $tarefa->status == 1 ? 'checked' : '' }}> concluida
+        </label>
     </div>
 
     <button type="submit" class="btn btn-warning mt-3">Salvar </button>
